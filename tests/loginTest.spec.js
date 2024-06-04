@@ -1,4 +1,4 @@
-import { expect, test } from "../pages/basePage";
+import { expect, test } from "../base/basePage";
 import * as data from "../testData/testData.json";
 
 test.describe("Page object test demo", async () => {  

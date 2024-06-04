@@ -15,6 +15,8 @@ class LoginPage {
 
   async clickinBtn() {
     await this.page.click("(//button[normalize-space()='Login'])[1]");
+    await this.page.c
+    
   }
 
   async login(email, password) {

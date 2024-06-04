@@ -1,11 +1,15 @@
-import { expect, test } from "../pages/basePage";
-import * as data from "../testData/testData.json";
+import { test } from "../base/basePage"
+import * as data from "../testData/testData.json"
 
-test.describe("", async () => {  
-  test("Login test_02", async ({ page, baseURL, loginPage, editingPage }) => {
+test.describe("Page object test demo", async () => {
+  test("Login test_02", async ({ page, baseURL, loginPage,editingPage }) => {
     await page.goto(`${baseURL}auth/login`);
     await loginPage.login(data.email, data.password);
-    await page.waitForTimeout(5000)
+    await editingPage.clickDetail(data.taskTitle)
+    await page.waitForTimeout(3000)
+    await editingPage.editDetail()
+    await page.waitForTimeout(3000)
+
+
   });
- 
-});
+})
