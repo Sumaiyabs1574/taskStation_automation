@@ -24,7 +24,7 @@ module.exports = defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: "https://v2.sbueurope.mytask.today/",
+    baseURL: "https://sbueurope.mytask.today/",
     headless: false,
     bypassCSP:false,
     viewport: { width: 1536, height: 730 },
