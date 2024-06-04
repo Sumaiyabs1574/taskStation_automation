@@ -1,1 +1,4 @@
 //span[@class='MuiChip-label MuiChip-labelSmall css-tavflp' and @xpath='1' ]
+
+
+//h5[contains(text(),'test02')]/following-sibling::div[@class='MuiStack-root css-l256j9']/span[@aria-label='Details']
