@@ -9,10 +9,18 @@ test.describe("Page object test demo", async () => {
     await page.waitForTimeout(3000);
     const task =new createtaskPage(page);
     await page.waitForTimeout(3000);
-await task.NewTask(data.Date,data.Name)
-await page.waitForTimeout(3000);
+await task.NewTask(data.Date,data.Name);
+await task.Verifytask(data.Name);
+const verifytaskname = await task.Verifytask();
+await expect(verifytaskname).toBeTruthy()
+
+
+
 
 
   });
+
+
+
  
 });
