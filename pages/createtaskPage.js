@@ -9,7 +9,8 @@ this.projectoption="//li[@role='option']";
 this.selectTag="//div[@id='mui-component-select-tag']";
 this.tagoption="//li[normalize-space()='Research']";
 this.createButton="(//button[normalize-space()='Create'])[1]";
-this .taskaddedname="(//div)[66]"
+
+
 
 }
 
@@ -27,10 +28,19 @@ await this.page.locator(this.createButton).click();
 await this.page.waitForTimeout(5000);
 }
 
+async verifytaskn(Name) {
+    const Nameoftask = "//h5[normalize-space()='"+Name+"']";
+    return await this.page.locator(Nameoftask ).isVisible()
+ }
 
+ async verifyproject(SelectProject) {
+    const NameofProject = "(//span[normalize-space()='"+SelectProject+"'])[1]";
+    return await this.page.locator(NameofProject).isVisible()
+ }
+ async verifytag(SelectTag) {
+    const Nameoftag = "(//span[normalize-space()='"+SelectTag+"'])[1]";
 
-async Verifytask(Name){
-    const taskNameElement = await this.page.locator(this.taskaddedname);
-    return await taskNameElement.isVisible()
+    return await this.page.locator(Nameoftag).isVisible()
+ }
 
-}}
+}
