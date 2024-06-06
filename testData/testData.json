@@ -1,6 +1,12 @@
 {
     "email": "sumaiya.habib@brainstation-23.com",
-    "password":"BS1574",
-    "taskTitle": "test02"
-   
+    "password": "BS1574",
+    "taskTitle": "task to edit",
+    "description": "Task is edited ",
+    "date": "06/06/2024",
+    "oldTime": "5m",
+    "editiedTime": "5m",
+    "remark": "Edit done",
+    "project": "Task Station",
+    "tag": "Learning"
 }
