@@ -1,5 +1,4 @@
 import { test, expect } from "@playwright/test";
-const LoginPage = require("../pages/loginPage");
 const ReportPage = require("../pages/reportPage");
 const fs = require("fs");
 
