@@ -1,15 +1,37 @@
+// import { test as baseTest } from '@playwright/test';
+// import LoginPage from "../Pages/loginPage";
+// import EditingPage from "../Pages/editingPage";
+
+// const testPages = baseTest.extend({
+//     loginPage: async ({ page }, use) => {
+//         await use(new LoginPage(page));
+//     },
+//     editingPage: async ({ page }, use) => {
+//         await use(new EditingPage(page));
+//     },
+// });
+
+// export const test = testPages;
+// export const expect = testPages.expect;
+
 import { test as baseTest } from '@playwright/test';
 import LoginPage from "../Pages/loginPage";
 import EditingPage from "../Pages/editingPage";
+import { storageState } from '@playwright/test';
 
 const testPages = baseTest.extend({
     loginPage: async ({ page }, use) => {
-        await use(new LoginPage(page));
+        const loginPage = new LoginPage(page);
+        await loginPage.loadAuthenticationState(storageState);
+        await use(loginPage);
     },
     editingPage: async ({ page }, use) => {
-        await use(new EditingPage(page));
+        const editingPage = new EditingPage(page);
+        await editingPage.loadAuthenticationState(storageState);
+        await use(editingPage);
     },
 });
 
 export const test = testPages;
 export const expect = testPages.expect;
+

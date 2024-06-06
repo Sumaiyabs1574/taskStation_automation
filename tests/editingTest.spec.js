@@ -3,7 +3,7 @@ import * as data from "../testData/testData.json";
 
 test.beforeEach("Task Edit", async ({ page, baseURL, loginPage }) => {
     await page.goto(`${baseURL}auth/login`);
-    await loginPage.login(data.email, data.password);
+    await loginPage.loadAuthenticationState();
 });
 
 test.describe.serial("Task Station automation", async () => {
@@ -27,3 +27,4 @@ test.describe.serial("Task Station automation", async () => {
         await editingPage.blockerToTodo();
     });
 });
+

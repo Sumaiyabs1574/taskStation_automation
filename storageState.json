@@ -1,0 +1,18 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "https://sbueurope.mytask.today",
+      "localStorage": [
+        {
+          "name": "persist:root",
+          "value": "{\"authReducer\":\"{\\\"auth\\\":{\\\"refresh\\\":\\\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcxNzc2ODQ4OSwiaWF0IjoxNzE3NjgyMDg5LCJqdGkiOiI1ZDZhMDY5NGQ5Mjc0MTJmYWQzYzI4YTUyMGNjY2Q0YSIsInVzZXJfaWQiOjEwMn0.bUpcva3WFsEG56Ly7uI7sHKcHYvr6KPzVtKx7s77kjw\\\",\\\"access\\\":\\\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE3NzE4MDg5LCJpYXQiOjE3MTc2ODIwODksImp0aSI6ImExOThlZjk5YWJiZDRkZjBiOGI1OTNlYmM0N2Y0YTUwIiwidXNlcl9pZCI6MTAyfQ.oobMcEDk0gUi9VRVmfF7mwlrT0_Xd39PNcT2Rsdk1ig\\\"}}\",\"_persist\":\"{\\\"version\\\":-1,\\\"rehydrated\\\":true}\"}"
+        },
+        {
+          "name": "prevPath",
+          "value": "/auth/login"
+        }
+      ]
+    }
+  ]
+}

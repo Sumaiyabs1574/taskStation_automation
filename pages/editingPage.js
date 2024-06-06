@@ -4,7 +4,10 @@ export default class EditingPage {
   constructor(page) {
     this.page = page;
   }
-
+  async loadAuthenticationState(storageState) {
+    // Load authentication state from storageState.json
+    await this.page.context().storageState(storageState);
+  }
   async clickDetail(taskTitle) {
     await this.page.click(`//h5[contains(text(),'${taskTitle}')]/following-sibling::div[@class='MuiStack-root css-l256j9']/span[@aria-label='Details']`);
   }

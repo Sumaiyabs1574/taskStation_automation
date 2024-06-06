@@ -1,5 +1,3 @@
-const { Page } = require("@playwright/test");
-
 class LoginPage {
   constructor(page) {
     this.page = page;
@@ -16,7 +14,6 @@ class LoginPage {
   async clickinBtn() {
     await this.page.click("(//button[normalize-space()='Login'])[1]");
     await this.page.c
-    
   }
 
   async login(email, password) {
@@ -24,6 +21,12 @@ class LoginPage {
     await this.enterPassword(password);
     await this.clickinBtn();
   }
+
+  async loadAuthenticationState() {    
+    const storageState = require('../storageState.json');
+    await this.page.context().storageState(storageState);
+  }
 }
 
 module.exports = LoginPage;
+
