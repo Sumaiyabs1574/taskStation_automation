@@ -21,7 +21,6 @@ module.exports = defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL: "https://sbueurope.mytask.today/",
@@ -30,8 +29,6 @@ module.exports = defineConfig({
     viewport: { width: 1536, height: 730 },
     screenshot: "on",
     video: "on",
-    
-    trace: 'on-first-retry',
   },
 
   projects: [
@@ -77,6 +74,24 @@ module.exports = defineConfig({
     //   use: { ...devices['Desktop Firefox'], channel: 'firefox' },
     // }
   ],
+  reporter: [
+    ["dot"],
+    ["allure-playwright"],
+  [
+    "json",
+    {
+      outputFile: "jsonReport/jsonReport.json",
+    },
+  ],
+  [
+    "html",
+    {
+      outputFile: "htmlReport/htmlReport.html",
+      open: "never",
+    },
+  ],]
+
+  
 
   /* Run your local dev server before starting the tests */
   // webServer: {
