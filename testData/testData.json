@@ -1,5 +1,6 @@
 {
-    "email": "shazzad.mia@brainstation-23.com",
-    "password":"123456789@"
+    "loginEndPoint": "auth/login",
+    "email": "sumaiya.habib@brainstation-23.com",
+    "password":"BS1574"
    
 }
