@@ -10,7 +10,7 @@ export default class EditingPage {
   }
 
   async editDetail(project, tag, description, oldTime, date, editiedTime, remark) {
-    
+
     // Select project and assert right project is selected
     await this.page.click("(//div[@id='task-view-modal-project'])[1]");
     await this.page.click(`//li[contains(text(),'${project}')]`);
@@ -54,5 +54,35 @@ export default class EditingPage {
     await this.page.getByRole('button', { name: 'Close' }).click();
 
     await this.page.waitForTimeout(3000);
+  }
+
+  async todoToComplete() {
+    await this.page.getByLabel('more').click();
+    await this.page.getByRole('menuitem', { name: 'Completed' }).click();
+    await this.page.locator('#three-dots-menu div').first().click();
+    await this.page.getByRole('button', { name: 'Close' }).click();
+    const elementHandle = await this.page.$('//h5[normalize-space()="task to edit"]/ancestor::*[@class="MuiStack-root css-mmtdxd"]');
+    const idValue = await elementHandle?.getAttribute('id');
+    expect(idValue).toBe('done-drop-point');
+  }
+
+  async completeToBlocker() {
+    await this.page.getByLabel('more').click();
+    await this.page.getByRole('menuitem', { name: 'Blocker' }).click();
+    await this.page.locator('#three-dots-menu div').first().click();
+    await this.page.getByRole('button', { name: 'Close' }).click();
+    const elementHandle = await this.page.$('//h5[normalize-space()="task to edit"]/ancestor::*[@class="MuiStack-root css-mmtdxd"]');
+    const idValue = await elementHandle?.getAttribute('id');
+    expect(idValue).toBe('blocked-drop-point');
+  }
+
+  async blockerToTodo() {
+    await this.page.getByLabel('more').click();
+    await this.page.getByRole('menuitem', { name: 'TODO' }).click();
+    await this.page.locator('#three-dots-menu div').first().click();
+    await this.page.getByRole('button', { name: 'Close' }).click();
+    const elementHandle = await this.page.$('//h5[normalize-space()="task to edit"]/ancestor::*[@class="MuiStack-root css-mmtdxd"]');
+    const idValue = await elementHandle?.getAttribute('id');
+    expect(idValue).toBe('to_do-drop-point');
   }
 }
