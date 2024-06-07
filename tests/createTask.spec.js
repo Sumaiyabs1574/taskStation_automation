@@ -46,5 +46,9 @@ test.describe.serial("CreateTask", () => {
    await task4. CreatTaskwithoutProject(data.Date,data.Name);
    await expect(page.getByText('Project is required'), 'Project is required').toBeVisible();
   });
-
+//verify that if user did not provide date it takes current date and create task
+test("CreateTaskNeg4", async ({ page }) => {
+  const task4 =new createtaskPage(page);
+ await task4. CreatTaskwithoutdate(data.Name);
+});
 })

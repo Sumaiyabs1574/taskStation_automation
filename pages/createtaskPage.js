@@ -89,5 +89,22 @@ exports.createtaskPage=class createtaskPage{
                await this.page.locator(this.createButton).click();
                
                }
+
+             
+      async  CreatTaskwithoutdate (Name){
+         await this.page.locator(this.addButton).click();
+         await this.page.waitForTimeout(4000);
+         await this.page.locator(this.taskName).fill(Name);
+         
+         await this.page.locator(this.selectProject).click();
+         await this.page.locator(this.projectoption).click();
+         await this.page.locator(this.selectTag).click();
+         
+         await this.page.locator(this.tagoption).click();
+         
+         await this.page.locator(this.createButton).click();
+         
+      
+      }  
    
       }
