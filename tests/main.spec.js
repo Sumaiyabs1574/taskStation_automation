@@ -15,11 +15,12 @@ test.describe("TaskStation Automation-Create Task", () => {
   test("CreateTask", async ({ page }) => {
     const task =new createtaskPage(page);
    await task.NewTask(data.Date,data.Name);
-   await expect(page.getByText('DS'), 'DS').toBeVisible();
+   await expect(page.getByText('Meeting'), 'Meeting').toBeVisible();
    const verifyprojectname=await task.verifyproject(data.SelectProject);
    await expect(verifyprojectname).toBeTruthy(); 
    const verifytagkname=await task.verifytag(data.SelectTag);
    await expect(verifytagkname).toBeTruthy();
+   await task.addworklog(data.oldTime,data.oldremark);
    });
  
  

@@ -9,9 +9,10 @@ exports.createtaskPage=class createtaskPage{
       this.selectTag="//div[@id='mui-component-select-tag']";
       this.tagoption="//li[normalize-space()='Research']";
       this.createButton="(//button[normalize-space()='Create'])[1]";
-      
-      
-      
+      this.ditailsIcon="(//span[@aria-label='Details'])[1]";
+      this.worklogbuton="(//button[normalize-space()='Work log'])[1]";
+      this.addlogbutton="(//button[normalize-space()='Add Log'])[1]";
+      this.savebutton="//span[normalize-space()='Save']";
       }
       
       async NewTask (Date,Name){
@@ -48,6 +49,17 @@ exports.createtaskPage=class createtaskPage{
          
       
           return await this.page.locator(Nameoftag).isVisible()
+       }
+
+       async addworklog(oldTime,oldremark) {
+         await this.page.locator(this.ditailsIcon).click();
+         await this.page.locator(this.worklogbuton).click();
+         await this.page.locator(this.addlogbutton).click();
+         await this.page.getByLabel('Total Time').click();
+         await this.page.getByLabel('Total Time').fill(`${oldTime}`);
+         await this.page.getByLabel('Remarks').click();
+         await this.page.getByLabel('Remarks').fill(`${oldremark}`);
+         await this.page.locator(this.savebutton).click();
        }
       
    
