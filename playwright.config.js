@@ -21,7 +21,9 @@ module.exports = defineConfig({
     baseURL: "https://sbueurope.mytask.today/",
     headless: false,
     bypassCSP: false,
-    viewport: { width: 1536, height: 730 },
+    screenshot: "on",
+    video: "retain-on-failure",
+    // viewport: { width: 1536, height: 730 },
     trace: "on-first-retry",
   },
 
