@@ -5,10 +5,10 @@ const fs = require("fs");
 test.describe("TaskStation Automation-Create Task", () => {});
 test.describe("TaskStation Automation-Edit Task", () => {});
 test.describe("TaskStation Automation-Report", () => {
-  let reportPage;
+  let basePge;
   test.beforeEach(async ({ page }) => {
     await page.goto("https://sbueurope.mytask.today/general/my-report");
-    reportPage = new ReportPage(page);
+    basePage = new ReportPage(page);
   });
   test("Correct Date Display for Time Duration Setup", async ({ page }) => {
     const test_DurationData = ["06/01/2024", "06/20/2024"];
