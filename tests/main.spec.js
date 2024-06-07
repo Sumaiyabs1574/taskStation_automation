@@ -1,9 +1,8 @@
+const fs = require("fs");
 import { test, expect } from "@playwright/test";
 const ReportPage = require("../pages/reportPage");
 import * as data from "../testData/testData.json";
-import * as data from "../testData/testData.json";
 const EditingPage = require("../pages/editingPage");
-const fs = require("fs");
 
 let basePge;
 test.beforeEach(async ({ page, baseURL }) => {
@@ -11,8 +10,6 @@ test.beforeEach(async ({ page, baseURL }) => {
   basePge = page;
 });
 test.describe("TaskStation Automation-Create Task", () => {});
-
-test.describe("TaskStation Automation-Edit Task", () => {});
 
 test.describe.serial("TaskStation Automation-Edit Task", () => {
   let editingPage;
