@@ -39,7 +39,7 @@ export default class EditingPage {
 
     // Update worklog time and date and assert date and time is updated
     await this.page.getByRole('tab', { name: 'Work log' }).click();
-    await this.page.click(`//span[normalize-space()='${oldTime}']`);
+    await this.page.click(`//span[@class='MuiBox-root css-1scpmm7' and text()='${oldTime}']`);
     await this.page.fill("//input[@placeholder='DD/MM/YYYY']", `${date}`);
     await this.page.getByLabel('Total Time').click();
     await this.page.getByLabel('Total Time').fill(`${editiedTime}`);
@@ -47,11 +47,11 @@ export default class EditingPage {
     await this.page.getByLabel('Remarks').fill(`${remark}`);
     await this.page.getByRole('button', { name: 'Edit' }).click();
     await expect(this.page.getByText('Log Edited')).toBeVisible();
-    const elementHandle02 = await this.page.locator(`//span[normalize-space()='${editiedTime}']`);
+    const elementHandle02 = await this.page.locator(`//span[@class='MuiBox-root css-1scpmm7' and text()='${editiedTime}']`);
     const textContent02 = await elementHandle02.textContent();
     expect(textContent02).toBe(editiedTime);
     const reversedDate = date.split('/').reverse().join('-');
-    const elementHandle03 = await this.page.locator(`//span[normalize-space()='${editiedTime}']/../preceding-sibling::*//p[normalize-space()='${reversedDate}']`);
+    const elementHandle03 = await this.page.locator(`//span[@class='MuiBox-root css-1scpmm7' and text()='${editiedTime}']/../preceding-sibling::*//p[normalize-space()='${reversedDate}']`);
     const textContent03 = await elementHandle03?.textContent();
     expect(textContent03).toBe(reversedDate);
     await this.page.getByRole('button', { name: 'Close' }).click();
@@ -59,32 +59,32 @@ export default class EditingPage {
     await this.page.waitForTimeout(3000);
   }
 
-  async todoToComplete() {
+  async todoToComplete(taskTitle) {
     await this.page.getByLabel('more').click();
     await this.page.getByRole('menuitem', { name: 'Completed' }).click();
     await this.page.locator('#three-dots-menu div').first().click();
     await this.page.getByRole('button', { name: 'Close' }).click();
-    const elementHandle = await this.page.$('//h5[normalize-space()="task to edit"]/ancestor::*[@class="MuiStack-root css-mmtdxd"]');
+    const elementHandle = await this.page.$(`//h5[normalize-space()='${taskTitle}']/ancestor::*[@class="MuiStack-root css-mmtdxd"]`);
     const idValue = await elementHandle?.getAttribute('id');
     expect(idValue).toBe('done-drop-point');
   }
 
-  async completeToBlocker() {
+  async completeToBlocker(taskTitle) {
     await this.page.getByLabel('more').click();
     await this.page.getByRole('menuitem', { name: 'Blocker' }).click();
     await this.page.locator('#three-dots-menu div').first().click();
     await this.page.getByRole('button', { name: 'Close' }).click();
-    const elementHandle = await this.page.$('//h5[normalize-space()="task to edit"]/ancestor::*[@class="MuiStack-root css-mmtdxd"]');
+    const elementHandle = await this.page.$(`//h5[normalize-space()='${taskTitle}']/ancestor::*[@class="MuiStack-root css-mmtdxd"]`);
     const idValue = await elementHandle?.getAttribute('id');
     expect(idValue).toBe('blocked-drop-point');
   }
 
-  async blockerToTodo() {
+  async blockerToTodo(taskTitle) {
     await this.page.getByLabel('more').click();
     await this.page.getByRole('menuitem', { name: 'TODO' }).click();
     await this.page.locator('#three-dots-menu div').first().click();
     await this.page.getByRole('button', { name: 'Close' }).click();
-    const elementHandle = await this.page.$('//h5[normalize-space()="task to edit"]/ancestor::*[@class="MuiStack-root css-mmtdxd"]');
+    const elementHandle = await this.page.$(`//h5[normalize-space()='${taskTitle}']/ancestor::*[@class="MuiStack-root css-mmtdxd"]`);
     const idValue = await elementHandle?.getAttribute('id');
     expect(idValue).toBe('to_do-drop-point');
   }

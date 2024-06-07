@@ -14,17 +14,17 @@ test.describe.serial("Task Station automation", async () => {
 
     test("Todo to Complete", async ({ editingPage }) => {
         await editingPage.clickDetail(data.taskTitle);
-        await editingPage.todoToComplete();
+        await editingPage.todoToComplete(data.taskTitle);
     });
 
     test("Complete To Blocker", async ({ editingPage }) => {
         await editingPage.clickDetail(data.taskTitle);
-        await editingPage.completeToBlocker();
+        await editingPage.completeToBlocker(data.taskTitle);
     });
 
     test("Blocker To Todo", async ({ editingPage }) => {
         await editingPage.clickDetail(data.taskTitle);
-        await editingPage.blockerToTodo();
+        await editingPage.blockerToTodo(data.taskTitle);
     });
 });
 
