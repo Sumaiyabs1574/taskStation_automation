@@ -2,7 +2,9 @@
   "name": "plawrightwithjavascript",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test --workers 1 --project chromium"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

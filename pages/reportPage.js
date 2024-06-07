@@ -68,7 +68,7 @@ class ReportPage {
   async isTaskAvailable(name) {
     const tasks =
       "//div[@class='MuiDataGrid-virtualScroller css-frlfct']/div/div/div/div";
-    const taskNames = tasks + "[@data-field='task']/div[text()='" + name + "']";
+    //const taskNames = tasks + "[@data-field='task']/div[text()='" + name + "']";
     const check =
       "//div[@class='MuiDataGrid-virtualScroller css-frlfct']/div/div/div/div[@data-field='task']/div[text()='report test']";
     await this.page.waitForSelector(check);
@@ -135,22 +135,17 @@ class ReportPage {
     const status = await rowContainer //div[text()='" + name + "']
       .locator("//div/div[@data-field='task']")
       .all();
-    // for (let i = 0; i < status.length; i++) {
-    //   console.log(`Row ${i}`, await status[i].textContent());
-    // }
-    // console.log("report rows:", await rowsNumber_.count());
     const columnNumber = await (await this.page.getByRole("rowgroup").first())
       .locator("//div[@role='row']/div")
       .count();
     return [status.length, columnNumber];
   }
-  async getTaskDetailsByName() {
-    const name = "test01";
+  async getTaskDetailsByName(taskName) {
+    const name = taskName;
     await this.page.waitForTimeout(5000);
     const taskCount = await this.page
       .locator(`//div[text()='${name}']`)
       .count();
-    //console.log("Task element Count", taskCount);
 
     if ((await taskCount) > 0) {
       const project = await this.page
@@ -171,7 +166,6 @@ class ReportPage {
         .textContent();
       return [project, task, tag, start_at, end_at, duration];
     } else {
-      //console.log("Parent element not visible");
       return null;
     }
   }
@@ -180,16 +174,11 @@ class ReportPage {
     let xpath = `//div[text()='${taskName}']/ancestor::div[@role='row']/div[@data-field='${datafield}']/div`;
 
     const count = await this.page.locator(xpath).count();
-    // console.log(
-    //   `Element count for ${taskName} with data-field ${datafield}: ${count}`
 
     if (count > 1) {
       const upD_xpath = `(${xpath})[1]`;
-      //console.log(`Multiple elements found, using first: ${upD_xpath}`);
       return upD_xpath;
     }
-
-    console.log(`Single element found: ${xpath}`);
     return xpath;
   }
 

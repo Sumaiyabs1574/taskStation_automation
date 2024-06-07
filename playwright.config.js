@@ -17,7 +17,7 @@ module.exports = defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [["html",{
     outputFile: "htmlReport/htmlReport.html",
-    open: "never",
+    open: "always",
   },]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -27,7 +27,7 @@ module.exports = defineConfig({
     screenshot: "on",
     video: "on",
     // viewport: { width: 1536, height: 730 },
-    trace: "on-first-retry",
+    // trace: "on-first-retry",
   },
 
   /* Configure projects for major browsers */
