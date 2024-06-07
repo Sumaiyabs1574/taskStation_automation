@@ -4,10 +4,17 @@ const ReportPage = require("../pages/reportPage");
 import * as data from "../testData/testData.json";
 const EditingPage = require("../pages/editingPage");
 
-let basePge;
 test.beforeEach(async ({ page, baseURL }) => {
+  const { width, height } = await page.evaluate(() => {
+    return {
+      width: window.screen.availWidth,
+      height: window.screen.availHeight,
+    };
+  });
+
+  // Set the viewport size to the maximum available width and height
+  await page.setViewportSize({ width, height });
   await page.goto(baseURL + data.loginEndPoint);
-  basePge = page;
 });
 test.describe("TaskStation Automation-Create Task", () => {});
 
@@ -63,7 +70,7 @@ test.describe("TaskStation Automation-Report", () => {
     expect(get_DurationData).toEqual(test_DurationData);
   });
   test("testTaskAvailabilityByName", async ({ page }) => {
-    const name = "report test";
+    const name = data.taskTitle;
     const flag_task = await reportPage.isTaskAvailable(name);
     expect(flag_task).toBeTruthy();
   });
@@ -98,14 +105,15 @@ test.describe("TaskStation Automation-Report", () => {
     expect(tableDetails[1]).toEqual(Object.keys(csvData[0]).length - 1);
   });
   test("testTestDetailsEquality", async ({}) => {
-    let project = "Task Station";
-    let name_;
-    let tag = "Learning";
-    let duration = "5h ";
+    let project = data.project;
+    let name_ = data.taskTitle;
+    let tag = data.tag;
+    let duration = data.editiedTime;
     const details = await reportPage.getTaskDetailsByName(name_);
+    console.log(project, name_, tag, duration);
+    console.log(details);
     if (details) {
       expect(project).toEqual(details[0]);
-      // await expect(task).toEqual(details[1]);
       expect(tag).toEqual(details[2]);
       expect(duration).toEqual(details[5]);
     }
