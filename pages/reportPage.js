@@ -28,7 +28,6 @@ class ReportPage {
 
   async downloadReport() {
     if (this.isDownloadButtonEnable) {
-      console.log("in downloadReport if section");
       const downloadPromise = this.page.waitForEvent("download");
       await this.page.locator(this.loc_btnDownload).click();
       const download = await downloadPromise;

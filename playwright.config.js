@@ -38,7 +38,6 @@ module.exports = defineConfig({
       use: {
         ...devices["Desktop Chrome"],
         storageState: "testData/.authentication/auth.json",
-        viewport: { width: 1536, height: 730 },
       },
       dependencies: ["setup"],
     },
