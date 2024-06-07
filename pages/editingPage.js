@@ -19,7 +19,7 @@ const { Page,expect } = require("@playwright/test");
     await this.page.locator('#task-view-modal-projectchipMenu div').first().click();
     const elementHandle = await this.page.$(`//div[@id="task-view-modal-project"]//span[@class="MuiChip-label MuiChip-labelSmall css-tavflp"][normalize-space()="${project}"]`);
     const textContent = await elementHandle?.textContent();
-    expect(textContent).toBe(`${project}`);
+    expect.soft(textContent).toBe(`${project}`);
 
     // Select tag and assert right tag is selected
     await this.page.click("(//div[@id='task-view-modal-project'])[2]");
@@ -27,14 +27,14 @@ const { Page,expect } = require("@playwright/test");
     await this.page.locator('#task-view-modal-projectchipMenu div').first().click();
     const elementHandle01 = await this.page.$(`//div[@id="task-view-modal-project"]//span[@class="MuiChip-label MuiChip-labelSmall css-tavflp"][normalize-space()="${tag}"]`);
     const textContent01 = await elementHandle01?.textContent();
-    expect(textContent01).toBe(`${tag}`);
+    expect.soft(textContent01).toBe(`${tag}`);
 
     // Write description and assert description is updated
     await this.page.getByRole('paragraph').click();
     await this.page.locator('.jodit-wysiwyg').fill(`${description}`);
     await this.page.getByRole('button', { name: 'Save' }).click();   
-    await expect(this.page.getByText('Description added')).toBeVisible();
-    await expect(this.page.getByRole('paragraph')).toContainText(`${description}`);
+    await expect.soft(this.page.getByText('Description added')).toBeVisible();
+    await expect.soft(this.page.getByRole('paragraph')).toContainText(`${description}`);
 
     // Update worklog time and date and assert date and time is updated
     await this.page.getByRole('tab', { name: 'Work log' }).click();
@@ -45,14 +45,14 @@ const { Page,expect } = require("@playwright/test");
     await this.page.getByLabel('Remarks').click();
     await this.page.getByLabel('Remarks').fill(`${remark}`);
     await this.page.getByRole('button', { name: 'Edit' }).click();
-    await expect(this.page.getByText('Log Edited')).toBeVisible();
+    await expect.soft(this.page.getByText('Log Edited')).toBeVisible();
     const elementHandle02 = await this.page.locator(`//span[@class='MuiBox-root css-1scpmm7' and text()='${editiedTime}']`);
     const textContent02 = await elementHandle02.textContent();
-    expect(textContent02).toBe(editiedTime);
+    expect.soft(textContent02).toBe(editiedTime);
     const reversedDate = date.split('/').reverse().join('-');
     const elementHandle03 = await this.page.locator(`//span[@class='MuiBox-root css-1scpmm7' and text()='${editiedTime}']/../preceding-sibling::*//p[normalize-space()='${reversedDate}']`);
     const textContent03 = await elementHandle03?.textContent();
-    expect(textContent03).toBe(reversedDate);
+    expect.soft(textContent03).toBe(reversedDate);
     await this.page.getByRole('button', { name: 'Close' }).click();
 
     await this.page.waitForTimeout(3000);
@@ -65,7 +65,7 @@ const { Page,expect } = require("@playwright/test");
     await this.page.getByRole('button', { name: 'Close' }).click();
     const elementHandle = await this.page.$(`//h5[normalize-space()='${taskTitle}']/ancestor::*[@class="MuiStack-root css-mmtdxd"]`);
     const idValue = await elementHandle?.getAttribute('id');
-    expect(idValue).toBe('done-drop-point');
+    expect.soft(idValue).toBe('done-drop-point');
   }
 
   async completeToBlocker(taskTitle) {
@@ -75,7 +75,7 @@ const { Page,expect } = require("@playwright/test");
     await this.page.getByRole('button', { name: 'Close' }).click();
     const elementHandle = await this.page.$(`//h5[normalize-space()='${taskTitle}']/ancestor::*[@class="MuiStack-root css-mmtdxd"]`);
     const idValue = await elementHandle?.getAttribute('id');
-    expect(idValue).toBe('blocked-drop-point');
+    expect.soft(idValue).toBe('blocked-drop-point');
   }
 
   async blockerToTodo(taskTitle) {
@@ -85,7 +85,7 @@ const { Page,expect } = require("@playwright/test");
     await this.page.getByRole('button', { name: 'Close' }).click();
     const elementHandle = await this.page.$(`//h5[normalize-space()='${taskTitle}']/ancestor::*[@class="MuiStack-root css-mmtdxd"]`);
     const idValue = await elementHandle?.getAttribute('id');
-    expect(idValue).toBe('to_do-drop-point');
+    expect.soft(idValue).toBe('to_do-drop-point');
   }
 }
 module.exports = EditingPage;
