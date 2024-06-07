@@ -1,16 +1,25 @@
 import { test, expect } from "@playwright/test";
 const ReportPage = require("../pages/reportPage");
+import * as data from "../testData/testData.json";
 const fs = require("fs");
 
+let basePge;
+test.beforeEach(async ({ page, baseURL }) => {
+  await page.goto(baseURL + data.loginEndPoint);
+  basePge = page;
+});
 test.describe("TaskStation Automation-Create Task", () => {});
+
 test.describe("TaskStation Automation-Edit Task", () => {});
+
 test.describe("TaskStation Automation-Report", () => {
   let reportPage;
   test.beforeEach(async ({ page }) => {
     await page.goto("https://sbueurope.mytask.today/general/my-report");
-    reportPage = new ReportPage(page);
+    reportPage = await new ReportPage(page);
+    await reportPage.goToReportPage();
   });
-  test("Correct Date Display for Time Duration Setup", async ({ page }) => {
+  test("testDatePickerDisplaysCorrectDates", async ({}) => {
     const test_DurationData = ["06/01/2024", "06/20/2024"];
     await reportPage.setTimeDuration(
       test_DurationData[0],
@@ -19,24 +28,23 @@ test.describe("TaskStation Automation-Report", () => {
     const get_DurationData = await reportPage.getTimeDuration();
     expect(get_DurationData).toEqual(test_DurationData);
   });
-  test("Asertion on task avaibility by task Name", async ({ page }) => {
+  test("testTaskAvailabilityByName", async ({ page }) => {
     const name = "report test";
     const flag_task = await reportPage.isTaskAvailable(name);
-    await page.waitForTimeout(1000);
     expect(flag_task).toBeTruthy();
   });
-  test("Assertion on file downloadation", async ({}) => {
+  test("testFileDownload", async ({}) => {
     const filePath = await reportPage.downloadReport();
     expect(fs.existsSync(filePath)).toBe(true);
   });
-  test("Auto updation of data and download button enability test", async ({}) => {
+  test("testAutoDataUpdateAndDownloadButton", async ({page}) => {
     //await page.waitForTimeout(5000);
     await reportPage.setTimeDuration("07/07/2024", "08/07/2024");
-    //await page.waitForTimeout(9000);
-    expect(await reportPage.isDownloadButtonEnable()).toBeFalsy();
-    expect.soft(await reportPage.web_getTotalTime()).toEqual("0m");
+   // await page.waitForTimeout(1000);
+    expect.soft(await reportPage.isDownloadButtonEnable()).toBeFalsy();
+    expect(await reportPage.web_getTotalTime()).toEqual("0m");
   });
-  test("Validation of total time of webView and csv", async ({}) => {
+  test("testTotalTimeEqualityBetweenWebViewAndCSV", async ({}) => {
     const filePath = await reportPage.downloadReport();
     const web_totalTimeHour = await reportPage.web_getTotalTime();
     //console.log(`Total Time Hour From Web:- ${web_totalTimeHour}`);
@@ -45,7 +53,7 @@ test.describe("TaskStation Automation-Report", () => {
     //console.log(`Total Time Hour From csv:- ${csv_totalTimeHour}`);
     expect(web_totalTimeHour).toEqual(csv_totalTimeHour);
   });
-  test("validation of report table structure", async ({}) => {
+  test("testReportTableStructureBetweenWeb&CSV", async ({}) => {
     const filePath = await reportPage.downloadReport();
     const csvData = await reportPage.getReportJson(filePath);
     const tableDetails = await reportPage.getReportDetais();
@@ -55,16 +63,17 @@ test.describe("TaskStation Automation-Report", () => {
     //description field is missed from report web view //but exist in csv file
     expect(tableDetails[1]).toEqual(Object.keys(csvData[0]).length - 1);
   });
-  test("Validation of Test Details", async ({}) => {
-    let project;
+  test("testTestDetailsEquality", async ({}) => {
+    let project = "Task Station";
     let name_;
-    let tag;
-    let duration;
+    let tag = "Learning";
+    let duration = "5h ";
     const details = await reportPage.getTaskDetailsByName(name_);
     if (details) {
       expect(project).toEqual(details[0]);
       // await expect(task).toEqual(details[1]);
       expect(tag).toEqual(details[2]);
+      expect(duration).toEqual(details[5]);
     }
   });
 });

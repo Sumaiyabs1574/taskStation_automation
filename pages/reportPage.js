@@ -46,7 +46,7 @@ class ReportPage {
     await this.page.getByPlaceholder("MM/DD/YYYY").first().fill(startDate);
     await this.page.waitForLoadState();
     await this.page.getByPlaceholder("MM/DD/YYYY").nth(1).fill(endDate);
-    await this.page.waitForTimeout(1000);
+    await this.page.waitForTimeout(2000);
   }
   async getTimeDuration() {
     const startDate = await this.page
@@ -73,7 +73,7 @@ class ReportPage {
     const check =
       "//div[@class='MuiDataGrid-virtualScroller css-frlfct']/div/div/div/div[@data-field='task']/div[text()='report test']";
     await this.page.waitForSelector(check);
-    console.log("elements:", await this.page.locator(taskNames).count());
+    // console.log("elements:", await this.page.locator(taskNames).count());
     if ((await this.page.locator(check).count()) > 0) {
       return true;
     } else {
@@ -128,50 +128,70 @@ class ReportPage {
   }
   async getReportDetais() {
     const rowContainer = await this.page.getByRole("rowgroup").nth(1);
-    console.log("report rows:", await rowContainer.count());
+    //console.log("report rows:", await rowContainer.count());
 
     // const element_rows = await rowContainer.getByRole("row").all();
-    const rowsNumber = await this.page.locator("//div[@role='row']").count();
+    // const rowsNumber = await this.page.locator("//div[@role='row']").count();
     const rowsNumber_ = await this.page.locator("//div[@role='row']"); //.count();
-    const status = await rowContainer
+    const status = await rowContainer //div[text()='" + name + "']
       .locator("//div/div[@data-field='task']")
       .all();
-    for (let i = 0; i < status.length; i++) {
-      console.log(`Row ${i}`, await status[i].textContent());
-    }
-    console.log("report rows:", await rowsNumber_.count());
+    // for (let i = 0; i < status.length; i++) {
+    //   console.log(`Row ${i}`, await status[i].textContent());
+    // }
+    // console.log("report rows:", await rowsNumber_.count());
     const columnNumber = await (await this.page.getByRole("rowgroup").first())
       .locator("//div[@role='row']/div")
       .count();
     return [status.length, columnNumber];
   }
-  async getTaskDetailsByName(name) {
+  async getTaskDetailsByName() {
     const name = "test01";
-    const parent_ele = await this.page.locator(
-      "//div[text()='" + name + "']/ancestor::div[@role='row']"
-    );
-    if (parent_ele.isVisible()) {
-      const project = await parent_ele
-        .locator("/div[@data-field='project']/div")
+    await this.page.waitForTimeout(5000);
+    const taskCount = await this.page
+      .locator(`//div[text()='${name}']`)
+      .count();
+    //console.log("Task element Count", taskCount);
+
+    if ((await taskCount) > 0) {
+      const project = await this.page
+        .locator(await this.getTaskDetailPath(name, "project"))
         .textContent();
       const task = name;
-      const tag = await parent_ele
-        .locator("/div[@data-field='tags']/div")
+      const tag = await this.page
+        .locator(await this.getTaskDetailPath(name, "tags"))
         .textContent();
-      const start_at = await parent_ele
-        .locator("/div[@data-field='start_at']/div")
+      const start_at = await this.page
+        .locator(await this.getTaskDetailPath(name, "start_at"))
         .textContent();
-      const end_at = await parent_ele
-        .locator("/div[@data-field='stop_at']/div")
+      const end_at = await this.page
+        .locator(await this.getTaskDetailPath(name, "stop_at"))
         .textContent();
-      const duration = await parent_ele
-        .locator("/div[@data-field='duration']/div")
+      const duration = await this.page
+        .locator(await this.getTaskDetailPath(name, "duration"))
         .textContent();
-
       return [project, task, tag, start_at, end_at, duration];
     } else {
+      //console.log("Parent element not visible");
       return null;
     }
+  }
+
+  async getTaskDetailPath(taskName, datafield) {
+    let xpath = `//div[text()='${taskName}']/ancestor::div[@role='row']/div[@data-field='${datafield}']/div`;
+
+    const count = await this.page.locator(xpath).count();
+    // console.log(
+    //   `Element count for ${taskName} with data-field ${datafield}: ${count}`
+
+    if (count > 1) {
+      const upD_xpath = `(${xpath})[1]`;
+      //console.log(`Multiple elements found, using first: ${upD_xpath}`);
+      return upD_xpath;
+    }
+
+    console.log(`Single element found: ${xpath}`);
+    return xpath;
   }
 
   getdigitFromString(string_) {
@@ -181,9 +201,3 @@ class ReportPage {
 }
 
 module.exports = ReportPage;
-
-/* 
-const taskProjects = tasks + "[@data-field='project']";
-const taskDuration = tasks + "[@data-field='duration']";
-const tasktags = tasks + "[@data-field='duration']";
-*/
