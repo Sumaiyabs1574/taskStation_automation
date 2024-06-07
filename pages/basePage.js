@@ -1,17 +1,20 @@
-const { test: baseTest } = require('@playwright/test');
-const LoginPage = require('./loginPage');
-
-
+import { test as baseTest } from '@playwright/test';
+import LoginPage from "../Pages/loginPage";
+import EditingPage from "../Pages/editingPage";
+import { storageState } from '@playwright/test';
 
 const testPages = baseTest.extend({
     loginPage: async ({ page }, use) => {
-        await use(new LoginPage(page));
+        const loginPage = new LoginPage(page);
+        await loginPage.loadAuthenticationState(storageState);
+        await use(loginPage);
     },
-
-   
+    editingPage: async ({ page }, use) => {
+        const editingPage = new EditingPage(page);
+        // await editingPage.loadAuthenticationState(storageState);
+        // await use(editingPage);
+    },
 });
 
-const test = testPages;
-const expect = testPages.expect;
-
-module.exports = { test, expect };
+export const test = testPages;
+export const expect = testPages.expect;
