@@ -4,7 +4,16 @@
     "Date":"21/06/2024",
     "Name":"DS",
     "SelectProject":"TASK_STATION",
-    "SelectTag":"RESEARCH"
+    "SelectTag":"RESEARCH",
+    "loginEndPoint": "auth/login",
+    "taskTitle": "Test Task",
+    "description": "Task is edited ",
+    "date": "06/06/2024",
+    "oldTime": "15m",
+    "editiedTime": "15m",
+    "remark": "Edit done",
+    "project": "Task Station",
+    "tag": "Learning"
    
 
 
