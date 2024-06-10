@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 const ReportPage = require("../pages/reportPage");
 import * as data from "../testData/testData.json";
 const EditingPage = require("../pages/editingPage");
-import{createtaskPage} from '../pages/createtaskPage';
+import { createtaskPage } from "../pages/createtaskPage";
 
 test.beforeEach(async ({ page, baseURL }) => {
   const { width, height } = await page.evaluate(() => {
@@ -15,7 +15,7 @@ test.beforeEach(async ({ page, baseURL }) => {
 
   // Set the viewport size to the maximum available width and height
   await page.setViewportSize({ width, height });
-  await page.goto(baseURL + data.loginEndPoint);
+  await page.goto(baseURL + data.homePageEndPoint);
 });
 test.describe("TaskStation Automation-Create Task", () => {
   //create New task
@@ -87,69 +87,71 @@ test.describe.serial("TaskStation Automation-Edit Task", () => {
     await editingPage.blockerToTodo(data.taskTitle);
   });
 });
-// test.describe("TaskStation Automation-Report", () => {
-//   let reportPage;
-//   test.beforeEach(async ({ page }) => {
-//     await page.goto("https://sbueurope.mytask.today/general/my-report");
-//     reportPage = await new ReportPage(page);
-//     await reportPage.goToReportPage();
-//   });
-//   test("testDatePickerDisplaysCorrectDates", async ({}) => {
-//     const test_DurationData = ["06/01/2024", "06/20/2024"];
-//     await reportPage.setTimeDuration(
-//       test_DurationData[0],
-//       test_DurationData[1]
-//     );
-//     const get_DurationData = await reportPage.getTimeDuration();
-//     expect(get_DurationData).toEqual(test_DurationData);
-//   });
-//   test("testTaskAvailabilityByName", async ({ page }) => {
-//     const name = data.taskTitle;
-//     const flag_task = await reportPage.isTaskAvailable(name);
-//     expect(flag_task).toBeTruthy();
-//   });
-//   test("testFileDownload", async ({}) => {
-//     const filePath = await reportPage.downloadReport();
-//     expect(fs.existsSync(filePath)).toBe(true);
-//   });
-//   test("testAutoDataUpdateAndDownloadButton", async ({ page }) => {
-//     //await page.waitForTimeout(5000);
-//     await reportPage.setTimeDuration("07/07/2024", "08/07/2024");
-//     // await page.waitForTimeout(1000);
-//     expect.soft(await reportPage.isDownloadButtonEnable()).toBeFalsy();
-//     expect(await reportPage.web_getTotalTime()).toEqual("0m");
-//   });
-//   test("testTotalTimeEqualityBetweenWebViewAndCSV", async ({}) => {
-//     const filePath = await reportPage.downloadReport();
-//     const web_totalTimeHour = await reportPage.web_getTotalTime();
-//     //console.log(`Total Time Hour From Web:- ${web_totalTimeHour}`);
-//     const csvData = await reportPage.getReportJson(filePath);
-//     const csv_totalTimeHour = await reportPage.csv_getTotalTime(csvData);
-//     //console.log(`Total Time Hour From csv:- ${csv_totalTimeHour}`);
-//     expect(web_totalTimeHour).toEqual(csv_totalTimeHour);
-//   });
-//   test("testReportTableStructureBetweenWeb&CSV", async ({}) => {
-//     const filePath = await reportPage.downloadReport();
-//     const csvData = await reportPage.getReportJson(filePath);
-//     const tableDetails = await reportPage.getReportDetais();
-//     //console.log("Web:", tableDetails[0]);
-//     //console.log("Csv:", csvData.length);
-//     expect.soft(tableDetails[0]).toEqual(csvData.length);
-//     //description field is missed from report web view //but exist in csv file
-//     expect(tableDetails[1]).toEqual(Object.keys(csvData[0]).length - 1);
-//   });
-//   test("testTestDetailsEquality", async ({}) => {
-//     let project = data.project;
-//     let name_ = data.taskTitle;
-//     let tag = data.tag;
-//     let duration = data.editiedTime;
-//     const details = await reportPage.getTaskDetailsByName(name_);
-//     console.log(project, name_, tag, duration);
-//     console.log(details);
-//     if (details) {
-//       expect(project).toEqual(details[0]);
-//       expect(tag).toEqual(details[2]);
-//       expect(duration).toEqual(details[5]);
-//     }
-//   });
-// });
+test.describe("TaskStation Automation-Report", () => {
+  let reportPage;
+  test.beforeEach(async ({ page }) => {
+    await page.goto("https://sbueurope.mytask.today/general/my-report");
+    reportPage = await new ReportPage(page);
+    await reportPage.goToReportPage();
+  });
+  test("testDatePickerDisplaysCorrectDates", async ({}) => {
+    const test_DurationData = ["06/01/2024", "06/20/2024"];
+    await reportPage.setTimeDuration(
+      test_DurationData[0],
+      test_DurationData[1]
+    );
+    const get_DurationData = await reportPage.getTimeDuration();
+    expect(get_DurationData).toEqual(test_DurationData);
+  });
+  test("testTaskAvailabilityByName", async ({}) => {
+    const name = data.taskTitle;
+    const flag_task = await reportPage.isTaskAvailable(name);
+    expect(flag_task).toBeTruthy();
+  });
+  test("testFileDownload", async ({}) => {
+    const filePath = await reportPage.downloadReport();
+    expect(fs.existsSync(filePath)).toBe(true);
+  });
+  test("testAutoDataUpdateAndDownloadButton", async ({}) => {
+    await reportPage.setTimeDuration(data.reportStartDate, data.reportEndtDate);
+    expect.soft(await reportPage.isDownloadButtonEnable()).toBeFalsy();
+    expect(await reportPage.web_getTotalTime()).toEqual("0m");
+  });
+  test("testTotalTimeEqualityBetweenWebViewAndCSV", async ({}) => {
+    const filePath = await reportPage.downloadReport();
+    const web_totalTimeHour = await reportPage.web_getTotalTime();
+    //console.log(`Total Time Hour From Web:- ${web_totalTimeHour}`);
+    const csvData = await reportPage.getReportJson(filePath);
+    const csv_totalTimeHour = await reportPage.csv_getTotalTime(csvData);
+    //console.log(`Total Time Hour From csv:- ${csv_totalTimeHour}`);
+    //expect(web_totalTimeHour).toEqual(csv_totalTimeHour);
+
+    //await console.log("WebCsv:", typeof web_totalTimeHour);
+
+    expect(csv_totalTimeHour.includes(web_totalTimeHour)).toBeTruthy();
+  });
+
+  test("testReportTableStructureBetweenWeb&CSV", async ({}) => {
+    const filePath = await reportPage.downloadReport();
+    const csvData = await reportPage.getReportJson(filePath);
+    const tableDetails = await reportPage.getReportDetais();
+  
+    expect.soft(tableDetails[0]).toEqual(csvData.length);
+    //description field is missed from report web view //but exist in csv file
+    expect(tableDetails[1]).toEqual(Object.keys(csvData[0]).length - 1);
+  });
+  test("testTestDetailsEquality", async ({}) => {
+    let project = data.project;
+    let name_ = data.taskTitle;
+    let tag = data.tag;
+    let duration = data.editiedTime;
+    const details = await reportPage.getTaskDetailsByName(name_);
+    console.log(project, name_, tag, duration);
+    console.log(details);
+    if (details) {
+      expect.soft(project).toEqual(details[0]);
+      expect.soft(tag).toEqual(details[2]);
+      expect(duration).toEqual(details[5]);
+    }
+  });
+});

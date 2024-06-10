@@ -1,24 +1,21 @@
 {
-    "email": "sumaiya.habib@brainstation-23.com",
-    "password":"BS1574",
-    "Date":"21/06/2024",
-    "Name":"TaskforEdit01",
-    "SelectProject":"TASK_STATION",
-    "SelectTag":"Testing",
-    "loginEndPoint": "auth/login",
-    "taskTitle": "TaskforEdit01",
-    "description": "Task is edited ",
-    "date": "06/06/2024",
-    "oldTime": "15m",
-    "editiedTime": "15m",
-    "oldremark":"create done",
-    "remark": "Edit done",
-    "project": "Task Station",
-    "tag": "Learning"
-   
-
-
-   
+  "email": "sumaiya.habib@brainstation-23.com",
+  "password": "BS1574",
+  "Date": "21/06/2024",
+  "Name": "Testing for Learning99",
+  "SelectProject": "TASK_STATION",
+  "SelectTag": "RESEARCH",
+  "loginEndPoint": "auth/login",
+  "homePageEndPoint": "general/my-task",
+  "taskTitle": "clear",
+  "description": "Task is edited ",
+  "date": "10/06/2024",
+  "oldTime": "30m",
+  "editiedTime": "15m",
+  "oldremark": "create done",
+  "remark": "Edit done",
+  "project": "Task Station",
+  "tag": "Learning",
+  "reportStartDate": "06/20/2024",
+  "reportEndtDate": "06/28/2024"
 }
-
-

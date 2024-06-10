@@ -1,5 +1,6 @@
 import csv from "csvtojson";
 import path from "path";
+import { toASCII } from "punycode";
 
 class ReportPage {
   constructor(page) {
@@ -70,7 +71,9 @@ class ReportPage {
       "//div[@class='MuiDataGrid-virtualScroller css-frlfct']/div/div/div/div";
     //const taskNames = tasks + "[@data-field='task']/div[text()='" + name + "']";
     const check =
-      "//div[@class='MuiDataGrid-virtualScroller css-frlfct']/div/div/div/div[@data-field='task']/div[text()='report test']";
+      "//div[@class='MuiDataGrid-virtualScroller css-frlfct']/div/div/div/div[@data-field='task']/div[text()='" +
+      name +
+      "']";
     await this.page.waitForSelector(check);
     // console.log("elements:", await this.page.locator(taskNames).count());
     if ((await this.page.locator(check).count()) > 0) {
@@ -85,6 +88,7 @@ class ReportPage {
     return jsonContent;
   }
   async csv_getTotalTime(content) {
+    let totalTimeinHour = 0;
     let hour = 0;
     let minute = 0;
     let day = 0;
@@ -96,6 +100,7 @@ class ReportPage {
             day += this.getdigitFromString(part);
           } else if (part.includes("h")) {
             hour += this.getdigitFromString(part);
+            totalTimeinHour += this.getdigitFromString(part);
           } else if (part.includes("m")) {
             minute += this.getdigitFromString(part);
           }
@@ -119,7 +124,8 @@ class ReportPage {
     } else {
       total_time = `${fday} ${fmin}`;
     }
-    return total_time.trim();
+    totalTimeinHour += day * 8 + hour + this.minsToHours(minute);
+    return [total_time.trim(), totalTimeinHour + "h"];
   }
   async isDownloadButtonEnable() {
     await this.page.waitForLoadState();
@@ -185,6 +191,13 @@ class ReportPage {
   getdigitFromString(string_) {
     const match = string_.match(/\d+/);
     return Number(match);
+  }
+  minsToHours(minutes) {
+    let hours = minutes / 60;
+    return parseFloat(hours.toFixed(2));
+
+    //return Math.round(hours * 100) / 100; // auto rounded .567 to .57
+    // return (Math.round(hours * 100) / 100).toFixed(2); to show always 2 digits like .50
   }
 }
 
