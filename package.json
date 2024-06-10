@@ -2,13 +2,18 @@
   "name": "plawrightwithjavascript",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test --workers 1 --project chromium"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.44.1",
-    "@types/node": "^20.14.0"
+    "@types/node": "^20.14.2"
+  },
+  "dependencies": {
+    "csvtojson": "^2.0.10"
   }
 }

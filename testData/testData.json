@@ -1,5 +1,21 @@
 {
-    "email": "shazzad.mia@brainstation-23.com",
-    "password":"123456789@"
-   
+  "email": "sumaiya.habib@brainstation-23.com",
+  "password": "BS1574",
+  "Date": "21/06/2024",
+  "Name": "Testin0005",
+  "SelectProject": "TASK_STATION",
+  "SelectTag": "Research",
+  "loginEndPoint": "auth/login",
+  "homePageEndPoint": "general/my-task",
+  "taskTitle": "Testin0005",
+  "description": "Task is edited ",
+  "date": "10/06/2024",
+  "oldTime": "30m",
+  "editiedTime": "30m",
+  "oldremark": "create done",
+  "remark": "Edit done",
+  "project": "Task Station",
+  "tag": "Learning",
+  "reportStartDate": "06/20/2024",
+  "reportEndtDate": "06/28/2024"
 }
