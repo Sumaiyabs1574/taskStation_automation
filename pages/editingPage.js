@@ -25,7 +25,7 @@ const { Page,expect } = require("@playwright/test");
     await this.page.click("(//div[@id='task-view-modal-project'])[2]");
     await this.page.click(`//li[normalize-space()='${tag}']`);
     await this.page.locator('#task-view-modal-projectchipMenu div').first().click();
-    const elementHandle01 = await this.page.$(`//div[@id="task-view-modal-project"]//span[@class="MuiChip-label MuiChip-labelSmall css-tavflp"][normalize-space()="${tag}"]`);
+    const elementHandle01 = await this.page.locator(`//div[@id="task-view-modal-project"]//span[@class="MuiChip-label MuiChip-labelSmall css-tavflp"][normalize-space()="${tag}"]`);
     const textContent01 = await elementHandle01?.textContent();
     expect.soft(textContent01).toBe(`${tag}`);
 
@@ -34,7 +34,7 @@ const { Page,expect } = require("@playwright/test");
     await this.page.locator('.jodit-wysiwyg').fill(`${description}`);
     await this.page.getByRole('button', { name: 'Save' }).click();   
     await expect.soft(this.page.getByText('Description added')).toBeVisible();
-    await expect.soft(this.page.getByRole('paragraph')).toContainText(`${description}`);
+    await expect.soft(this.page.locator("//div[@class='jodit-wysiwyg']")).toContainText(`${description}`);
 
     // Update worklog time and date and assert date and time is updated
     await this.page.getByRole('tab', { name: 'Work log' }).click();
