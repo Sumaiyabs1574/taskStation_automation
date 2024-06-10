@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test --workers 1 --project chromium"
+    "test": "npx playwright test --workers 1 --project chromium",
+    "report": "allure generate allure-results -o allureReport --clean",
+    "serve-report": "allure open allureReport",
+    "clean": "rm -rf allure-results allureReport"
   },
   "keywords": [],
   "author": "",
@@ -11,7 +14,9 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.44.1",
-    "@types/node": "^20.14.2"
+    "@types/node": "^20.14.2",
+    "allure-commandline": "^2.29.0",
+    "allure-playwright": "^3.0.0-beta.3"
   },
   "dependencies": {
     "csvtojson": "^2.0.10"

@@ -125,7 +125,8 @@ class ReportPage {
       total_time = `${fday} ${fmin}`;
     }
     totalTimeinHour += day * 8 + hour + this.minsToHours(minute);
-    return [total_time.trim(), totalTimeinHour + "h"];
+    totalTimeinHour = totalTimeinHour.toFixed(2);
+    return [total_time.trim(), `${totalTimeinHour}h`];
   }
   async isDownloadButtonEnable() {
     await this.page.waitForLoadState();

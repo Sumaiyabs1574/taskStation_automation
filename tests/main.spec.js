@@ -137,7 +137,8 @@ test.describe("TaskStation Automation-Report", () => {
 
     const csvData = await reportPage.getReportJson(filePath);
     const csv_totalTimeHour = await reportPage.csv_getTotalTime(csvData);
-
+    console.log(csv_totalTimeHour)
+    console.log(web_totalTimeHour)
     expect(csv_totalTimeHour.includes(web_totalTimeHour)).toBeTruthy();
   });
 
