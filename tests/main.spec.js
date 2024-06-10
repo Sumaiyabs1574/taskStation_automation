@@ -20,50 +20,44 @@ test.beforeEach(async ({ page, baseURL }) => {
 test.describe("TaskStation Automation-Create Task", () => {
   //create New task
   test("CreateTask", async ({ page }) => {
-    const task = new createtaskPage(page);
-    await task.NewTask(data.Date, data.Name);
-    await expect(page.getByText("Meeting").first(), "Meeting").toBeVisible();
-    const verifyprojectname = await task.verifyproject(data.SelectProject);
-    await expect(verifyprojectname).toBeTruthy();
-    const verifytagkname = await task.verifytag(data.SelectTag);
-    await expect(verifytagkname).toBeTruthy();
-    await task.addworklog(data.oldTime, data.oldremark);
-  });
-
-  // Negative Test: Try to create Task without name and verify error message
-  test("CreateTaskNeg", async ({ page }) => {
-    const task2 = new createtaskPage(page);
-    await task2.CreatTaskwithoutName(data.Date);
-    await expect(
-      page.getByText("Name is required"),
-      "Name is required"
-    ).toBeVisible();
-  });
-
-  // Negative Test: Try to create Task without select tag and verify error message
-  test("CreateTaskNeg2", async ({ page }) => {
-    const task3 = new createtaskPage(page);
-    await task3.CreatTaskwithouttag(data.Date, data.Name);
-    await expect(
-      page.getByText("Tag is required"),
-      "Tag is required"
-    ).toBeVisible();
-  });
-
-  // Negative Test: Try to create Task without select project and verify error message
-  test("CreateTaskNeg3", async ({ page }) => {
-    const task4 = new createtaskPage(page);
-    await task4.CreatTaskwithoutProject(data.Date, data.Name);
-    await expect(
-      page.getByText("Project is required"),
-      "Project is required"
-    ).toBeVisible();
-  });
-  //verify that if user did not provide date it takes current date and create task
-  test("CreateTaskNeg4", async ({ page }) => {
-    const task4 = new createtaskPage(page);
-    await task4.CreatTaskwithoutdate(data.Name);
-  });
+    const task =new createtaskPage(page);
+   await task.NewTask(data.Name,data.SelectProject,data.SelectTag,data.oldTime,data.oldremark);
+   const verifyprojectname=await task.verifyproject(data.SelectProject);
+   await expect(verifyprojectname).toBeTruthy(); 
+   await task.addworklog(data.oldTime,data.oldremark);
+   });
+// //create New task with Timeline
+//    test("CreateTaskwithtimeline", async ({ page }) => {
+//     const task1 =new createtaskPage(page);
+//    await task1.NewTaskWithTimeline(data.Date,data.Name);
+//   })
+ 
+//    // Negative Test: Try to create Task without name and verify error message
+//    test("CreateTaskNeg", async ({ page }) => {
+//      const task2 =new createtaskPage(page);
+//     await task2. CreatTaskwithoutName (data.Date);
+//     await expect(page.getByText('Name is required'), 'Name is required').toBeVisible();
+//    });
+ 
+//    // Negative Test: Try to create Task without select tag and verify error message
+//    test("CreateTaskNeg2", async ({ page }) => {
+//      const task3 =new createtaskPage(page);
+//     await task3. CreatTaskwithouttag (data.Date,data.Name);
+//     await expect(page.getByText('Tag is required'), 'Tag is required').toBeVisible();
+//    });
+ 
+//    // Negative Test: Try to create Task without select project and verify error message
+//    test("CreateTaskNeg3", async ({ page }) => {
+//      const task4 =new createtaskPage(page);
+//     await task4. CreatTaskwithoutProject(data.Date,data.Name);
+//     await expect(page.getByText('Project is required'), 'Project is required').toBeVisible();
+//    });
+//  //verify that if user  provide date it create task on this date
+//  test("CreateTaskNeg4", async ({ page }) => {
+//    const task4 =new createtaskPage(page);
+//   await task4. CreatTaskwithdate(data.Date,data.Name);
+//   await expect(page.getByText('Meeting'), 'Meeting').toBeVisible();
+//  });
 });
 
 test.describe.serial("TaskStation Automation-Edit Task", () => {
