@@ -75,15 +75,7 @@ test.describe.serial("TaskStation Automation-Edit Task", () => {
 
   test("Task Edit", async ({ page }) => {
     await editingPage.clickDetail(data.taskTitle);
-    await editingPage.editDetail(
-      data.project,
-      data.tag,
-      data.description,
-      data.oldTime,
-      data.date,
-      data.editiedTime,
-      data.remark
-    );
+    await editingPage.editDetail(data.project,data.tag,data.description,data.oldTime,data.date,data.editiedTime,data.remark);
   });
 
   test("Todo to Complete", async ({ page }) => {
