@@ -157,8 +157,8 @@ test.describe("TaskStation Automation-Report", () => {
     console.log(project, name_, tag, duration);
     console.log(details);
     if (details) {
-      expect(project).toEqual(details[0]);
-      expect(tag).toEqual(details[2]);
+      expect.soft(project).toEqual(details[0]);
+      expect.soft(tag).toEqual(details[2]);
       expect(duration).toEqual(details[5]);
     }
   });
