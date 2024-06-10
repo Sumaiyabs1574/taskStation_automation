@@ -69,7 +69,7 @@ exports.createtaskPage=class createtaskPage{
            await this.page.locator(this.savebutton).scrollIntoViewIfNeeded();
            await this.page.locator(this.savebutton).click();
            console.log("Save button clicked");
-           await this.page.locator(this.close).click();
+           await this.page.locator("(//button[normalize-space()='Close'])[1]").click();
          } else {
            throw new Error("Save button is not found ");
          }
