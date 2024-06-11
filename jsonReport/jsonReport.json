@@ -1,7 +1,7 @@
 {
   "config": {
-    "configFile": "a:\\taskStation_automation\\playwright.config.js",
-    "rootDir": "a:/taskStation_automation/tests",
+    "configFile": "a:\\taskautojavascript\\taskStation_automation\\playwright.config.js",
+    "rootDir": "a:/taskautojavascript/taskStation_automation/tests",
     "forbidOnly": false,
     "fullyParallel": true,
     "globalSetup": null,
@@ -20,7 +20,7 @@
         null
       ],
       [
-        "a:\\taskStation_automation\\node_modules\\allure-playwright\\dist\\cjs\\index.js",
+        "a:\\taskautojavascript\\taskStation_automation\\node_modules\\allure-playwright\\dist\\cjs\\index.js",
         null
       ],
       [
@@ -44,13 +44,13 @@
     "quiet": false,
     "projects": [
       {
-        "outputDir": "a:/taskStation_automation/test-results",
+        "outputDir": "a:/taskautojavascript/taskStation_automation/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {},
         "id": "chromium",
         "name": "chromium",
-        "testDir": "a:/taskStation_automation/tests",
+        "testDir": "a:/taskautojavascript/taskStation_automation/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -91,24 +91,24 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 12,
+                      "workerIndex": 0,
                       "status": "passed",
-                      "duration": 11542,
+                      "duration": 20379,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2024-06-07T05:15:14.548Z",
+                      "startTime": "2024-06-11T07:01:06.017Z",
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "a:\\taskStation_automation\\test-results\\editingTest-Task-Station-automation-Task-Edit-chromium\\test-finished-1.png"
+                          "path": "a:\\taskautojavascript\\taskStation_automation\\test-results\\editingTest-Task-Station-automation-Task-Edit-chromium\\test-finished-1.png"
                         },
                         {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "a:\\taskStation_automation\\test-results\\editingTest-Task-Station-automation-Task-Edit-chromium\\video.webm"
+                          "path": "a:\\taskautojavascript\\taskStation_automation\\test-results\\editingTest-Task-Station-automation-Task-Edit-chromium\\video.webm"
                         }
                       ]
                     }
@@ -120,135 +120,6 @@
               "file": "editingTest.spec.js",
               "line": 10,
               "column": 9
-            },
-            {
-              "title": "Todo to Complete",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 12,
-                      "status": "passed",
-                      "duration": 4795,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2024-06-07T05:15:26.323Z",
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "a:\\taskStation_automation\\test-results\\editingTest-Task-Station-automation-Todo-to-Complete-chromium\\test-finished-1.png"
-                        },
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "a:\\taskStation_automation\\test-results\\editingTest-Task-Station-automation-Todo-to-Complete-chromium\\video.webm"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "526577bb8ca3292049a9-f976d0394b997538961e",
-              "file": "editingTest.spec.js",
-              "line": 15,
-              "column": 9
-            },
-            {
-              "title": "Complete To Blocker",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 12,
-                      "status": "passed",
-                      "duration": 4497,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2024-06-07T05:15:31.149Z",
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "a:\\taskStation_automation\\test-results\\editingTest-Task-Station-automation-Complete-To-Blocker-chromium\\test-finished-1.png"
-                        },
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "a:\\taskStation_automation\\test-results\\editingTest-Task-Station-automation-Complete-To-Blocker-chromium\\video.webm"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "526577bb8ca3292049a9-48531e4566b619726604",
-              "file": "editingTest.spec.js",
-              "line": 20,
-              "column": 9
-            },
-            {
-              "title": "Blocker To Todo",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 12,
-                      "status": "passed",
-                      "duration": 4720,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2024-06-07T05:15:35.663Z",
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "a:\\taskStation_automation\\test-results\\editingTest-Task-Station-automation-Blocker-To-Todo-chromium\\test-finished-1.png"
-                        },
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "a:\\taskStation_automation\\test-results\\editingTest-Task-Station-automation-Blocker-To-Todo-chromium\\video.webm"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "526577bb8ca3292049a9-cae4661a25ec6e8ca1b0",
-              "file": "editingTest.spec.js",
-              "line": 25,
-              "column": 9
             }
           ]
         }
@@ -257,9 +128,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2024-06-07T05:15:13.492Z",
-    "duration": 27235,
-    "expected": 4,
+    "startTime": "2024-06-11T07:01:05.017Z",
+    "duration": 21860.699,
+    "expected": 1,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

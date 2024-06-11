@@ -2,3 +2,44 @@
 
 
 //h5[contains(text(),'test02')]/following-sibling::div[@class='MuiStack-root css-l256j9']/span[@aria-label='Details']
+
+
+const { chromium } = require('playwright');
+
+(async () => {
+  // Use environment variables for sensitive information
+  const email = process.env.TASK_EMAIL;
+  const password = process.env.TASK_PASSWORD;
+
+  // Launch a new browser instance
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  
+  try {
+    // Navigate to the login page
+    await page.goto('https://sbueurope.mytask.today/auth/login');
+
+    // Fill in the login form
+    await page.fill("//input[@name='email']", email);
+    await page.fill("//input[@name='password']", password);
+
+    // Click the login button
+    await page.click("(//button[normalize-space()='Login'])[1]");
+
+    // Wait for navigation to complete
+    await page.waitForNavigation();
+
+    // Save the storage state to a file
+    await page.context().storageState({ path: 'storageState.json' });
+
+  } catch (error) {
+    console.error('An error occurred:', error);
+  } finally {
+    // Close the browser
+    await browser.close();
+  }
+})();
+
+export TASK_EMAIL=sumaiya.habib@brainstation-23.com
+export TASK_PASSWORD=BS1574
+node scripts/loginAndSaveState.js

@@ -8,6 +8,7 @@ const { chromium } = require('playwright');
   await page.fill("//input[@name='email']", 'sumaiya.habib@brainstation-23.com');
   await page.fill("//input[@name='password']", 'BS1574');
   await page.click("(//button[normalize-space()='Login'])[1]");
+  await page.waitForNavigation();
   await page.context().storageState({ path: 'storageState.json' });
   await browser.close();
 })();
