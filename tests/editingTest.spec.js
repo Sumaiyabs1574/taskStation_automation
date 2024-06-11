@@ -1,9 +1,9 @@
 import { expect, test } from "../base/basePage";
 import * as data from "../testData/testData.json";
 
-test.beforeEach("Task Edit", async ({ page, baseURL, loginPage }) => {
+test.beforeEach("Task Edit", async ({ page, baseURL }) => {
     await page.goto(`${baseURL}auth/login`);
-    await loginPage.loadAuthenticationState();
+    // await loginPage.loadAuthenticationState();
 });
 
 test.describe.serial("Task Station automation", async () => {

@@ -20,14 +20,14 @@ import EditingPage from "../Pages/editingPage";
 import { storageState } from '@playwright/test';
 
 const testPages = baseTest.extend({
-    loginPage: async ({ page }, use) => {
-        const loginPage = new LoginPage(page);
-        await loginPage.loadAuthenticationState(storageState);
-        await use(loginPage);
-    },
+    // loginPage: async ({ page }, use) => {
+    //     const loginPage = new LoginPage(page);
+    //     // await loginPage.loadAuthenticationState(storageState);
+    //     await use(loginPage);
+    // },
     editingPage: async ({ page }, use) => {
         const editingPage = new EditingPage(page);
-        await editingPage.loadAuthenticationState(storageState);
+        // await editingPage.loadAuthenticationState(storageState);
         await use(editingPage);
     },
 });
